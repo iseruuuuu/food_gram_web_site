@@ -227,12 +227,19 @@ header #logo-container {
 	text-align: center;
 }
 
+
 /*ロゴ画像*/
 header .logo img {
 	display: block;
 	margin: 0 auto;
 	width: 250px;
-	/*ロゴ画像の幅。お好みで。*/
+}
+
+/*Apple Storeの画像*/
+header .apple img {
+	display: block;
+	margin: 0 auto;
+	width: 30%;
 }
 
 /*謳い文句*/
