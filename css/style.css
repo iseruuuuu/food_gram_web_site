@@ -384,13 +384,14 @@ header .kazari {
 
 /*１枚目画像（変更不要）*/
 .slide5 .img1 {
-	position: relative;width: 100%;height: auto;
+	position: relative;
+	width: 100%;
+	height: auto;
 }
 
 /*画像のクリップ*/
 .slide5 .slide img {
 	width: 100%;
-	height: 100%;
 	object-fit: cover;
 	object-position: center;
 }
@@ -408,7 +409,7 @@ header .kazari {
     text-align: center;
 	position: absolute;
 	width: 100%;
-	bottom: 80px;	/*ボタンの配置場所。スライドショーの画面下からの距離。*/
+	bottom: 0px;	/*ボタンの配置場所。スライドショーの画面下からの距離。*/
 	left: 0px;
 }
 
