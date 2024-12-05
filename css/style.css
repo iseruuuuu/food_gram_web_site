@@ -196,7 +196,8 @@ a:hover {
 ---------------------------------------------------------------------------*/
 /*大きな画面で見た場合に両サイドに見える画像*/
 header::before {
-	background: url("../images/bg_header.jpg") no-repeat center center / cover;
+	/* background: url("../images/bg_header.jpg") no-repeat center center / cover; */
+	background: url("../images/header/heaer_bg.png") no-repeat center center / cover; 
 	/*背景画像の読み込み*/
 }
 
