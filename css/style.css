@@ -467,7 +467,8 @@ header .kazari {
 ---------------------------------------------------------------------------*/
 /*大きな画面で見た場合に両サイドに見える画像*/
 #special::before {
-	background: url('../images/bg_special.jpg') no-repeat center center / cover;
+	/* background: url('../images/bg_special.jpg') no-repeat center center / cover; */
+	background: url('../images/special/special_bg.png') no-repeat center center / cover;
 	/*背景画像の読み込み*/
 }
 
