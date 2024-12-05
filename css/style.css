@@ -196,8 +196,7 @@ a:hover {
 ---------------------------------------------------------------------------*/
 /*大きな画面で見た場合に両サイドに見える画像*/
 header::before {
-	/* background: url("../images/bg_header.jpg") no-repeat center center / cover; */
-	background: url("../images/header/heaer_bg.png") no-repeat center center / cover; 
+	background: url("../images/bg_header.jpg") no-repeat center center / cover
 	/*背景画像の読み込み*/
 }
 
@@ -209,7 +208,7 @@ header .contents {
 	height: 100vh;
 	display: flex;
 	align-items: center;
-	background: url("../images/1.jpg") no-repeat center center / cover;
+	background: url("../images/background/background1.png") no-repeat center center / cover;
 	/*背景画像の読み込み*/
 }
 
@@ -467,8 +466,7 @@ header .kazari {
 ---------------------------------------------------------------------------*/
 /*大きな画面で見た場合に両サイドに見える画像*/
 #special::before {
-	/* background: url('../images/bg_special.jpg') no-repeat center center / cover; */
-	background: url('../images/special/special_bg.png') no-repeat center center / cover;
+	background: url('../images/bg_special.jpg') no-repeat center center / cover;
 	/*背景画像の読み込み*/
 }
 
@@ -877,6 +875,13 @@ dl.table.reverse dd {
 	background: rgba(0, 0, 0, 0.04);
 }
 
+#tweet::before {
+	background: url('../images/bg_special.jpg') no-repeat center center / cover;
+	/*背景画像の読み込み*/
+}
+
+
+
 
 /*店舗情報
 ---------------------------------------------------------------------------*/
@@ -920,6 +925,54 @@ dl.table.reverse dd {
 
 /*Google Map*/
 #shop iframe {
+	width: 100%;
+	height: 500px;
+	/*高さ*/
+}
+
+
+/*店舗情報
+---------------------------------------------------------------------------*/
+/*大きな画面で見た場合に両サイドに見える画像*/
+#twitter::before {
+	background: url('../images/bg_shop.jpg') no-repeat center center / cover;
+	/*背景画像の読み込み*/
+}
+
+/*「店舗情報」「マップ」「SNSアイコン」を囲むブロック*/
+#tweeter .shop-data {
+	border-radius: 500px 500px 0px 0px;
+	/*角を丸くする指定。左上、右上、右下、左下への順番。500pxの数字は適当に大きければOK。*/
+	background: url('../images/bg_shop_data.jpg') no-repeat center center / cover;
+	/*背景画像の読み込み*/
+	color: #fff;
+	/*文字色*/
+	padding: 100px 50px 50px;
+	/*上、左右、下へのボックス内余白*/
+}
+
+/*「所在地」などが記載されているtableっぽいブロック（基本設定はこの上の「tableっぽいdl（「お知らせ」「店舗情報」共通）」で行っています。）*/
+#tweeter .shop-data dl.table {
+	border-top: 1px solid rgba(255, 255, 255, 0.3);
+	/*枠線の幅、線種、255,255,255は白のことで0.3は色が30%出た状態。下と揃えておく。*/
+}
+
+#tweeter .shop-data dl.table dt,
+#tweeter .shop-data dl.table dd {
+	border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+	/*枠線の幅、線種、255,255,255は白のことで0.3は色が30%出た状態。上と揃えておく。*/
+}
+
+/*Follow Usの画像*/
+#tweeter h3 img {
+	display: block;
+	width: 150px;
+	/*画像の幅*/
+	margin: 0 auto;
+}
+
+/*Google Map*/
+#tweeter iframe {
 	width: 100%;
 	height: 500px;
 	/*高さ*/
