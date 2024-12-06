@@ -1,3 +1,13 @@
+
+document.addEventListener("DOMContentLoaded", function () {
+    const loading = document.getElementById("loading");
+    window.addEventListener("load", function () {
+        loading.style.opacity = 0;
+        setTimeout(() => {
+            loading.style.display = "none";
+        }, 500); // アニメーション後に完全に非表示にする
+    });
+});
 //===============================================================
 // debounce関数
 //===============================================================
