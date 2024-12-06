@@ -8,14 +8,16 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 500); // アニメーション後に完全に非表示にする
     });
 });
+
+
 //===============================================================
 // debounce関数
 //===============================================================
 function debounce(func, wait) {
     var timeout;
-    return function() {
+    return function () {
         var context = this, args = arguments;
-        var later = function() {
+        var later = function () {
             timeout = null;
             func.apply(context, args);
         };
@@ -35,8 +37,8 @@ var $menubarHdr = $('#menubar_hdr');
 var $headerNav = $('header nav');
 
 // menu
-$(window).on("load resize", debounce(function() {
-    if(window.innerWidth < 9999) {	// ここがブレイクポイント指定箇所です
+$(window).on("load resize", debounce(function () {
+    if (window.innerWidth < 9999) {	// ここがブレイクポイント指定箇所です
         // 小さな端末用の処理
         $('body').addClass('small-screen').removeClass('large-screen');
         $menubar.addClass('display-none').removeClass('display-block');
@@ -52,10 +54,10 @@ $(window).on("load resize", debounce(function() {
     }
 }, 10));
 
-$(function() {
+$(function () {
 
     // ハンバーガーメニューをクリックした際の処理
-    $menubarHdr.click(function() {
+    $menubarHdr.click(function () {
         $(this).toggleClass('ham');
         if ($(this).hasClass('ham')) {
             $menubar.addClass('display-block');
@@ -65,61 +67,61 @@ $(function() {
     });
 
     // アンカーリンクの場合にメニューを閉じる処理
-    $menubar.find('a[href*="#"]').click(function() {
+    $menubar.find('a[href*="#"]').click(function () {
         $menubar.removeClass('display-block');
         $menubarHdr.removeClass('ham');
     });
 
     // ドロップダウンの親liタグ（空のリンクを持つaタグのデフォルト動作を防止）
-	$menubar.find('a[href=""]').click(function() {
-		return false;
-	});
-	$headerNav.find('a[href=""]').click(function() {
-		return false;
-	});
+    $menubar.find('a[href=""]').click(function () {
+        return false;
+    });
+    $headerNav.find('a[href=""]').click(function () {
+        return false;
+    });
 
-	// ドロップダウンメニューの処理
+    // ドロップダウンメニューの処理
     $menubar.find('li:has(ul)').addClass('ddmenu_parent');
     $('.ddmenu_parent > a').addClass('ddmenu');
     $headerNav.find('li:has(ul)').addClass('ddmenu_parent');
     $('.ddmenu_parent > a').addClass('ddmenu');
 
-// タッチ開始位置を格納する変数
-var touchStartY = 0;
+    // タッチ開始位置を格納する変数
+    var touchStartY = 0;
 
-// タッチデバイス用
-$('.ddmenu').on('touchstart', function(e) {
-    // タッチ開始位置を記録
-    touchStartY = e.originalEvent.touches[0].clientY;
-}).on('touchend', function(e) {
-    // タッチ終了時の位置を取得
-    var touchEndY = e.originalEvent.changedTouches[0].clientY;
-    
-    // タッチ開始位置とタッチ終了位置の差分を計算
-    var touchDifference = touchStartY - touchEndY;
-    
-    // スクロール動作でない（差分が小さい）場合にのみドロップダウンを制御
-    if (Math.abs(touchDifference) < 10) { // 10px以下の移動ならタップとみなす
-        var $nextUl = $(this).next('ul');
-        if ($nextUl.is(':visible')) {
-            $nextUl.stop().hide();
-        } else {
-            $nextUl.stop().show();
+    // タッチデバイス用
+    $('.ddmenu').on('touchstart', function (e) {
+        // タッチ開始位置を記録
+        touchStartY = e.originalEvent.touches[0].clientY;
+    }).on('touchend', function (e) {
+        // タッチ終了時の位置を取得
+        var touchEndY = e.originalEvent.changedTouches[0].clientY;
+
+        // タッチ開始位置とタッチ終了位置の差分を計算
+        var touchDifference = touchStartY - touchEndY;
+
+        // スクロール動作でない（差分が小さい）場合にのみドロップダウンを制御
+        if (Math.abs(touchDifference) < 10) { // 10px以下の移動ならタップとみなす
+            var $nextUl = $(this).next('ul');
+            if ($nextUl.is(':visible')) {
+                $nextUl.stop().hide();
+            } else {
+                $nextUl.stop().show();
+            }
+            $('.ddmenu').not(this).next('ul').hide();
+            return false; // ドロップダウンのリンクがフォローされるのを防ぐ
         }
-        $('.ddmenu').not(this).next('ul').hide();
-        return false; // ドロップダウンのリンクがフォローされるのを防ぐ
-    }
-});
+    });
 
     //PC用
-    $('.ddmenu_parent').hover(function() {
+    $('.ddmenu_parent').hover(function () {
         $(this).children('ul').stop().show();
-    }, function() {
+    }, function () {
         $(this).children('ul').stop().hide();
     });
 
     // ドロップダウンをページ内リンクで使った場合に、ドロップダウンを閉じる
-    $('.ddmenu_parent ul a').click(function() {
+    $('.ddmenu_parent ul a').click(function () {
         $('.ddmenu_parent > ul').hide();
     });
 
@@ -129,37 +131,37 @@ $('.ddmenu').on('touchstart', function(e) {
 //===============================================================
 // 小さなメニューが開いている際のみ、body要素のスクロールを禁止。
 //===============================================================
-$(document).ready(function() {
-  function toggleBodyScroll() {
-    // 条件をチェック
-    if ($('#menubar_hdr').hasClass('ham') && !$('#menubar_hdr').hasClass('display-none')) {
-      // #menubar_hdr が 'ham' クラスを持ち、かつ 'display-none' クラスを持たない場合、スクロールを禁止
-      $('body').css({
-        overflow: 'hidden',
-        height: '100%'
-      });
-    } else {
-      // その他の場合、スクロールを再び可能に
-      $('body').css({
-        overflow: '',
-        height: ''
-      });
+$(document).ready(function () {
+    function toggleBodyScroll() {
+        // 条件をチェック
+        if ($('#menubar_hdr').hasClass('ham') && !$('#menubar_hdr').hasClass('display-none')) {
+            // #menubar_hdr が 'ham' クラスを持ち、かつ 'display-none' クラスを持たない場合、スクロールを禁止
+            $('body').css({
+                overflow: 'hidden',
+                height: '100%'
+            });
+        } else {
+            // その他の場合、スクロールを再び可能に
+            $('body').css({
+                overflow: '',
+                height: ''
+            });
+        }
     }
-  }
 
-  // 初期ロード時にチェックを実行
-  toggleBodyScroll();
+    // 初期ロード時にチェックを実行
+    toggleBodyScroll();
 
-  // クラスが動的に変更されることを想定して、MutationObserverを使用
-  const observer = new MutationObserver(toggleBodyScroll);
-  observer.observe(document.getElementById('menubar_hdr'), { attributes: true, attributeFilter: ['class'] });
+    // クラスが動的に変更されることを想定して、MutationObserverを使用
+    const observer = new MutationObserver(toggleBodyScroll);
+    observer.observe(document.getElementById('menubar_hdr'), { attributes: true, attributeFilter: ['class'] });
 });
 
 
 //===============================================================
 // スムーススクロール（※バージョン2024-1）※通常タイプ
 //===============================================================
-$(function() {
+$(function () {
     // ページ上部へ戻るボタンのセレクター
     var topButton = $('.pagetop');
     // ページトップボタン表示用のクラス名
@@ -171,11 +173,11 @@ $(function() {
         // スクロール先の位置を計算（ページトップの場合は0、それ以外は要素の位置）
         var scrollTo = target === '#' ? 0 : $(target).offset().top - 25;
         // アニメーションでスムーススクロールを実行
-        $('html, body').animate({scrollTop: scrollTo}, 500);
+        $('html, body').animate({ scrollTop: scrollTo }, 500);
     }
 
     // ページ内リンクとページトップへ戻るボタンにクリックイベントを設定
-    $('a[href^="#"], .pagetop').click(function(e) {
+    $('a[href^="#"], .pagetop').click(function (e) {
         e.preventDefault(); // デフォルトのアンカー動作をキャンセル
         var id = $(this).attr('href') || '#'; // クリックされた要素のhref属性を取得、なければ'#'
         smoothScroll(id); // スムーススクロールを実行
@@ -183,8 +185,8 @@ $(function() {
 
     // スクロールに応じてページトップボタンの表示/非表示を切り替え
     $(topButton).hide(); // 初期状態ではボタンを隠す
-    $(window).scroll(function() {
-        if($(this).scrollTop() >= 300) { // スクロール位置が300pxを超えたら
+    $(window).scroll(function () {
+        if ($(this).scrollTop() >= 300) { // スクロール位置が300pxを超えたら
             $(topButton).fadeIn().addClass(scrollShow); // ボタンを表示
         } else {
             $(topButton).fadeOut().removeClass(scrollShow); // それ以外では非表示
@@ -192,11 +194,11 @@ $(function() {
     });
 
     // ページロード時にURLのハッシュが存在する場合の処理
-    if(window.location.hash) {
+    if (window.location.hash) {
         // ページの最上部に即時スクロールする
         $('html, body').scrollTop(0);
         // 少し遅延させてからスムーススクロールを実行
-        setTimeout(function() {
+        setTimeout(function () {
             smoothScroll(window.location.hash);
         }, 10);
     }
@@ -206,20 +208,20 @@ $(function() {
 //===============================================================
 // 汎用開閉処理
 //===============================================================
-$(function() {
-	$('.openclose').next().hide();
-	$('.openclose').click(function() {
-		$(this).next().slideToggle();
-		$('.openclose').not(this).next().slideUp();
-	});
+$(function () {
+    $('.openclose').next().hide();
+    $('.openclose').click(function () {
+        $(this).next().slideToggle();
+        $('.openclose').not(this).next().slideUp();
+    });
 });
 
 
 //===============================================================
 // テキストのフェードイン効果
 //===============================================================
-$(function() {
-    $('.fade-in-text').on('inview', function(event, isInView) {
+$(function () {
+    $('.fade-in-text').on('inview', function (event, isInView) {
         // この要素が既にアニメーションされたかどうかを確認
         if (isInView && !$(this).data('animated')) {
             // アニメーションがまだ実行されていない場合
@@ -243,46 +245,46 @@ $(function() {
 // 背景切り替え
 //===============================================================
 $(document).ready(function () {
-  function checkVisibility() {
-    const viewportHeight = $(window).height();
-    const scrollTop = $(window).scrollTop();
+    function checkVisibility() {
+        const viewportHeight = $(window).height();
+        const scrollTop = $(window).scrollTop();
 
-    $(".section").each(function () {
-      const sectionTop = $(this).offset().top;
-      const sectionHeight = $(this).outerHeight();
+        $(".section").each(function () {
+            const sectionTop = $(this).offset().top;
+            const sectionHeight = $(this).outerHeight();
 
-      if (
-        sectionTop < scrollTop + viewportHeight * 0.6 &&
-        sectionTop + sectionHeight > scrollTop + viewportHeight * 0.4
-      ) {
-        $(this).addClass("active").removeClass("inactive");
+            if (
+                sectionTop < scrollTop + viewportHeight * 0.6 &&
+                sectionTop + sectionHeight > scrollTop + viewportHeight * 0.4
+            ) {
+                $(this).addClass("active").removeClass("inactive");
 
-        // セクションのIDを取得
-        var sectionId = $(this).attr("id");
+                // セクションのIDを取得
+                var sectionId = $(this).attr("id");
 
-        // すべてのメニュー項目からactiveクラスを削除
-        $("#header-menu li").removeClass("active");
+                // すべてのメニュー項目からactiveクラスを削除
+                $("#header-menu li").removeClass("active");
 
-        // 対応するメニュー項目にactiveクラスを追加
-        $('#header-menu li a[href="#' + sectionId + '"]')
-          .parent()
-          .addClass("active");
-      } else {
-        $(this).addClass("inactive").removeClass("active");
-      }
-    });
-  }
+                // 対応するメニュー項目にactiveクラスを追加
+                $('#header-menu li a[href="#' + sectionId + '"]')
+                    .parent()
+                    .addClass("active");
+            } else {
+                $(this).addClass("inactive").removeClass("active");
+            }
+        });
+    }
 
-  $(window).on("scroll", checkVisibility);
-  checkVisibility();
+    $(window).on("scroll", checkVisibility);
+    checkVisibility();
 });
 
 
 //===============================================================
 // 横スライドインタイプのスライドショー
 //===============================================================
-$(function() {
-    $('.slide5').each(function() {
+$(function () {
+    $('.slide5').each(function () {
         var $this = $(this);
         var slides = $this.find('.slide');
         var slideCount = slides.length;
@@ -308,12 +310,12 @@ $(function() {
         slides.eq(currentIndex).addClass('active initial').removeClass('hidden');
 
         // 遅延後に .initial クラスを削除
-        setTimeout(function() {
+        setTimeout(function () {
             slides.eq(currentIndex).removeClass('initial');
         }, 50);
 
         // インジケータをクリックしたときの動作を設定
-        indicatorElements.on('click', function() {
+        indicatorElements.on('click', function () {
             var clickedIndex = $(this).data('index');
 
             // アニメーション中は操作を受け付けない
@@ -327,7 +329,7 @@ $(function() {
         });
 
         // 自動スライドのタイマー
-        setInterval(function() {
+        setInterval(function () {
             var nextIndex = (currentIndex + 1) % slideCount;
             changeSlide(nextIndex);
         }, 4000); // 4秒ごとにスライドを切り替える
@@ -346,7 +348,7 @@ $(function() {
             indicatorElements.eq(nextIndex).addClass('active');
 
             // アニメーション終了後の処理
-            setTimeout(function() {
+            setTimeout(function () {
                 // 左に移動したスライドに .hidden クラスを追加
                 slides.eq(currentIndex).removeClass('left').addClass('hidden');
 
@@ -361,8 +363,8 @@ $(function() {
 //===============================================================
 // サムネイルスライドショー
 //===============================================================
-$(document).ready(function() {
-    $('.slide-thumbnail1 .img').each(function() {
+$(document).ready(function () {
+    $('.slide-thumbnail1 .img').each(function () {
         var $imgParts = $(this);
         var $divs = $imgParts.children('div');
         var divCount = $divs.length;
@@ -395,10 +397,10 @@ $(document).ready(function() {
         $divs.clone().appendTo($imgParts);
 
         // アニメーションの一時停止と再開
-        $imgParts.on('mouseenter', function() {
+        $imgParts.on('mouseenter', function () {
             $(this).css('animation-play-state', 'paused');
         });
-        $imgParts.on('mouseleave', function() {
+        $imgParts.on('mouseleave', function () {
             $(this).css('animation-play-state', 'running');
         });
     });
